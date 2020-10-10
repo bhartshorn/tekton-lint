@@ -7,6 +7,7 @@
   "scripts": {
     "lint": "eslint --ext ts src",
     "test": "jest",
+    "build": "tsc",
     "coverage": "jest --coverage"
   },
   "version": "0.4.3",
