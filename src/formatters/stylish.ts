@@ -1,6 +1,6 @@
-const chalk = require('chalk');
-const stripAnsi = require('strip-ansi');
-const table = require('text-table');
+import chalk from 'chalk';
+import stripAnsi from 'strip-ansi';
+import table from 'text-table';
 
 const pluralize = (word, count) => (count === 1 ? word : `${word}s`);
 
@@ -31,10 +31,10 @@ const messageRow = (obj) => {
   ];
 };
 
-module.exports = (results) => {
+export default (results) => {
   let output = `\n`;
 
-  for (const [path, problems] of Object.entries(groupByPath(results))) {
+  for (const [path, problems] of Object.entries<any>(groupByPath(results))) {
     output += `${chalk.underline(path)}\n`;
 
     const section = table(

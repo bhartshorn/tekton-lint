@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 
-const { version } = require('./package.json');
-const minimist = require('minimist');
-const watch = require('./watch');
-const run = require('./runner');
-const logProblems = require('./log-problems');
+import { version } from '../package.json';
+import minimist from 'minimist';
+import watch from './watch';
+import run from './runner';
+import logProblems from './log-problems';
 
 const argv = minimist(process.argv.slice(2), {
   boolean: ['watch'],
@@ -71,7 +71,7 @@ $ tekton-lint --watch '**/*.yaml'
   } else {
     run(argv._)
       .then((problems) => {
-        logProblems(argv, problems);
+        logProblems(argv as any, problems);
 
         const hasError = problems.some(p => p.level === 'error');
         const warningCount = problems.filter(p => p.level === 'warning').length;

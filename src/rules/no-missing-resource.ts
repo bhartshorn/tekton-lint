@@ -1,5 +1,5 @@
-module.exports = (docs, tekton, report) => {
-  for (const listener of Object.values(tekton.listeners)) {
+export default (docs, tekton, report) => {
+  for (const listener of Object.values<any>(tekton.listeners)) {
     for (const trigger of listener.spec.triggers) {
       if (!trigger.binding) continue;
       const name = trigger.binding.name;
@@ -9,7 +9,7 @@ module.exports = (docs, tekton, report) => {
     }
   }
 
-  for (const listener of Object.values(tekton.listeners)) {
+  for (const listener of Object.values<any>(tekton.listeners)) {
     for (const trigger of listener.spec.triggers) {
       if (!trigger.template) continue;
       const name = trigger.template.name;
@@ -19,7 +19,7 @@ module.exports = (docs, tekton, report) => {
     }
   }
 
-  for (const template of Object.values(tekton.triggerTemplates)) {
+  for (const template of Object.values<any>(tekton.triggerTemplates)) {
     for (const resourceTemplate of template.spec.resourcetemplates) {
       if (resourceTemplate.kind !== 'PipelineRun') continue;
       if (resourceTemplate.spec.pipelineSpec) continue;
@@ -33,7 +33,7 @@ module.exports = (docs, tekton, report) => {
     }
   }
 
-  for (const pipeline of Object.values(tekton.pipelines)) {
+  for (const pipeline of Object.values<any>(tekton.pipelines)) {
     for (const task of pipeline.spec.tasks) {
       if (!task.conditions) continue;
       for (const condition of task.conditions) {
@@ -43,7 +43,7 @@ module.exports = (docs, tekton, report) => {
     }
   }
 
-  for (const pipeline of Object.values(tekton.pipelines)) {
+  for (const pipeline of Object.values<any>(tekton.pipelines)) {
     for (const task of pipeline.spec.tasks) {
       if (!task.taskRef) continue;
       const name = task.taskRef.name;

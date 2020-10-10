@@ -1,4 +1,4 @@
-module.exports = (docs) => {
+export default (docs) => {
   const resourceReducer = (obj, item) => {
     if (!obj[item.kind]) {
       obj[item.kind] = {};

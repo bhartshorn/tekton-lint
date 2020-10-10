@@ -1,4 +1,4 @@
-const { walk, pathToString } = require('../walk');
+import { walk, pathToString } from '../walk';
 
 const isValidName = (name) => {
   const valid = new RegExp('^[a-z0-9-()$.]*$');
@@ -27,8 +27,8 @@ const naming = (resource, prefix, report) => (node, path, parent) => {
   }
 };
 
-module.exports = (docs, tekton, report) => {
-  for (const pipeline of Object.values(tekton.pipelines)) {
+export default (docs, tekton, report) => {
+  for (const pipeline of Object.values<any>(tekton.pipelines)) {
     walk(pipeline.spec.tasks, ['spec', 'tasks'], naming(pipeline.metadata.name, 'params', report));
   }
 };

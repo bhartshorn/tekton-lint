@@ -1,4 +1,4 @@
-const { alg, Graph } = require('graphlib');
+import { alg, Graph } from 'graphlib';
 
 function readParamReference({ value }) {
   const taskResultReferenceRegexp = /\$\(tasks\.[a-z|-]*\.results\.[a-z|-]*\)/;
@@ -67,13 +67,13 @@ function errorCyclesInPipeline(pipeline, referenceCreators, report) {
   const pipelineTaskGraph = buildTaskGraph(pipeline, referenceCreators);
   for (const cycle of alg.findCycles(pipelineTaskGraph)) {
     for (const taskNameInCycle of cycle) {
-      const taskInCycle = Object.values(pipeline.spec.tasks).find(task => task.name === taskNameInCycle);
+      const taskInCycle = Object.values<any>(pipeline.spec.tasks).find(task => task.name === taskNameInCycle);
       report(`Cycle found in tasks (dependency graph): ${[...cycle, cycle[0]].join(' -> ')}`, taskInCycle, 'name');
     }
   }
 }
 
-module.exports = (docs, tekton, report) => {
+export default (docs, tekton, report) => {
   for (const pipeline of Object.values(tekton.pipelines)) {
     errorCyclesInPipeline(pipeline, [runAfterReferences, paramsReferences, resourceInputReferences], report);
   }

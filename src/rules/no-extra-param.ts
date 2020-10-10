@@ -3,8 +3,8 @@ function getTaskParams(spec) {
   return spec.params;
 }
 
-module.exports = (docs, tekton, report) => {
-  for (const pipeline of Object.values(tekton.pipelines)) {
+export default (docs, tekton, report) => {
+  for (const pipeline of Object.values<any>(tekton.pipelines)) {
     for (const task of pipeline.spec.tasks) {
       if (task.taskRef) {
         const name = task.taskRef.name;
@@ -24,7 +24,7 @@ module.exports = (docs, tekton, report) => {
       }
     }
   }
-  for (const pipeline of Object.values(tekton.pipelines)) {
+  for (const pipeline of Object.values<any>(tekton.pipelines)) {
     for (const task of pipeline.spec.tasks) {
       if (task.taskSpec) {
         const params = getTaskParams(task.taskSpec);
@@ -48,8 +48,8 @@ module.exports = (docs, tekton, report) => {
       }
     }
   }
-  for (const pipeline of Object.values(tekton.pipelines)) {
-    for (const template of Object.values(tekton.triggerTemplates)) {
+  for (const pipeline of Object.values<any>(tekton.pipelines)) {
+    for (const template of Object.values<any>(tekton.triggerTemplates)) {
       const matchingResource = template.spec.resourcetemplates.find(item => item.spec && item.spec.pipelineRef && item.spec.pipelineRef.name === pipeline.metadata.name);
       if (!matchingResource) continue;
       const pipelineParams = pipeline.spec.params || [];

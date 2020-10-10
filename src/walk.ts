@@ -1,4 +1,4 @@
-function walk(node, path, visitor, parent) {
+export function walk(node, path, visitor, parent?) {
   if (typeof node === 'string' || typeof node === 'number') {
     visitor(node, path, parent);
   } else if (Array.isArray(node)) {
@@ -13,7 +13,7 @@ function walk(node, path, visitor, parent) {
   }
 }
 
-function pathToString(path) {
+export function pathToString(path) {
   let str = '';
   for (const segment of path) {
     if (typeof segment == 'number') {
@@ -27,6 +27,3 @@ function pathToString(path) {
   }
   return str;
 }
-
-module.exports.walk = walk;
-module.exports.pathToString = pathToString;

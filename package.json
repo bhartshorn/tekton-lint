@@ -17,7 +17,7 @@
     "formatters/*.js"
   ],
   "scripts": {
-    "lint": "eslint './*.js' './rules/*.js' './regression-tests/*.js'",
+    "lint": "eslint --ext ts src",
     "test": "jest",
     "coverage": "jest --coverage"
   },
@@ -46,6 +46,8 @@
   "devDependencies": {
     "@commitlint/cli": "^11.0.0",
     "@commitlint/config-conventional": "^11.0.0",
+    "@typescript-eslint/eslint-plugin": "^4.4.0",
+    "@typescript-eslint/parser": "^4.4.0",
     "eslint": "^6.8.0",
     "husky": "^4.2.3",
     "jest": "^26.0.1",

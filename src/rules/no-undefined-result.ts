@@ -1,4 +1,4 @@
-const { walk, pathToString } = require('../walk');
+import { walk, pathToString } from '../walk';
 
 const taskNameRegexp = /\$\(tasks\.(.*?)\..*?\)/;
 
@@ -19,11 +19,11 @@ const checkUndefinedResult = (pipeline, tekton, report) => (value, path, parent)
   }
 };
 
-module.exports = (docs, tekton, report) => {
-  for (const pipeline of Object.values(tekton.pipelines)) {
+export default (docs, tekton, report) => {
+  for (const pipeline of Object.values<any>(tekton.pipelines)) {
     walk(pipeline, [], checkUndefinedResult(pipeline, tekton, report));
   }
-  for (const pipeline of Object.values(tekton.pipelines)) {
+  for (const pipeline of Object.values<any>(tekton.pipelines)) {
     for (const task of pipeline.spec.tasks) {
       if (!task.params) continue;
       for (const param of task.params) {

@@ -1,4 +1,5 @@
-const collectResources = require('../collect-resources');
+import collectResources from '../collect-resources';
+
 const isValidName = (name) => {
   const valid = new RegExp('^[a-z0-9-()$.]*$');
   return valid.test(name);
@@ -10,7 +11,7 @@ function getTaskParams(spec) {
 }
 
 function checkInvalidParameterName(resources, report) {
-  for (const resource of Object.values(resources)) {
+  for (const resource of Object.values<any>(resources)) {
     let params;
     if (resource.kind === 'Task') {
       params = getTaskParams(resource.spec);
@@ -27,7 +28,7 @@ function checkInvalidParameterName(resources, report) {
   }
 }
 
-module.exports = (docs, tekton, report) => {
+export default (docs, tekton, report) => {
   checkInvalidParameterName(tekton.tasks, report);
   checkInvalidParameterName(tekton.conditions, report);
   checkInvalidParameterName(tekton.triggerTemplates, report);

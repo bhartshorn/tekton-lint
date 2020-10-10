@@ -1,4 +1,4 @@
-module.exports = (docs, tekton, report) => {
+export default (docs, tekton, report) => {
   const resourceNames = new Map();
 
   for (const resource of docs) {

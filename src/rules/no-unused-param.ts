@@ -1,4 +1,4 @@
-const { walk } = require('../walk');
+import { walk } from '../walk';
 
 const unused = (params, prefix) => (node) => {
   const r1 = new RegExp(`\\$\\(${prefix}.(.*?)\\)`, 'g');
@@ -22,8 +22,8 @@ function getParams(kind, spec) {
   return [];
 }
 
-module.exports = (docs, tekton, report) => {
-  for (const task of Object.values(tekton.tasks)) {
+export default (docs, tekton, report) => {
+  for (const task of Object.values<any>(tekton.tasks)) {
     const params = getParams(task.kind, task.spec);
     const occurences = Object.fromEntries(params.map(param => [param.name, 0]));
     for (const prefix of ['inputs.params', 'params']) {
@@ -37,7 +37,7 @@ module.exports = (docs, tekton, report) => {
     }
   }
 
-  for (const condition of Object.values(tekton.conditions)) {
+  for (const condition of Object.values<any>(tekton.conditions)) {
     const params = getParams(condition.kind, condition.spec);
     const occurences = Object.fromEntries(params.map(param => [param.name, 0]));
     walk(condition.spec.check, ['spec', 'check'], unused(occurences, 'params'));
@@ -47,7 +47,7 @@ module.exports = (docs, tekton, report) => {
     }
   }
 
-  for (const template of Object.values(tekton.triggerTemplates)) {
+  for (const template of Object.values<any>(tekton.triggerTemplates)) {
     const params = getParams(template.kind, template.spec);
     const occurences = Object.fromEntries(params.map(param => [param.name, 0]));
     walk(template.spec, ['spec'], unused(occurences, 'params'));
@@ -57,7 +57,7 @@ module.exports = (docs, tekton, report) => {
     }
   }
 
-  for (const pipeline of Object.values(tekton.pipelines)) {
+  for (const pipeline of Object.values<any>(tekton.pipelines)) {
     const params = getParams(pipeline.kind, pipeline.spec);
     const occurences = Object.fromEntries(params.map(param => [param.name, 0]));
     walk(pipeline.spec.tasks, ['spec', 'tasks'], unused(occurences, 'params'));

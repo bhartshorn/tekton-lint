@@ -1,5 +1,5 @@
-module.exports = (docs, tekton, report) => {
-  for (const pipeline of Object.values(tekton.pipelines)) {
+export default (docs, tekton, report) => {
+  for (const pipeline of Object.values<any>(tekton.pipelines)) {
     for (const task of pipeline.spec.tasks) {
       if (!task.runAfter) continue;
 

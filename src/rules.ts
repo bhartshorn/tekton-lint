@@ -1,5 +1,5 @@
-const rules = require('./rule-loader');
-const Reporter = require('./reporter');
+import rules from './rule-loader';
+import Reporter from './reporter';
 
 const createReporter = (rule, config, reporter) => {
   const isError = config.rules[rule] && config.rules[rule] === 'error';
@@ -36,7 +36,7 @@ const parse = docs => ({
   ])),
 });
 
-module.exports.lint = function lint(docs, reporter, config) {
+export function lint(docs, reporter, config) {
   reporter = reporter || new Reporter();
   config = config || {
     rules: {},

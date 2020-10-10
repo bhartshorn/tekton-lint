@@ -1,5 +1,5 @@
-module.exports = (docs, tekton, report) => {
-  for (const task of Object.values(tekton.tasks)) {
+export default (docs, tekton, report) => {
+  for (const task of Object.values<any>(tekton.tasks)) {
     const volumes = (task.spec.volumes || []).map(volume => volume.name);
 
     for (const step of task.spec.steps) {

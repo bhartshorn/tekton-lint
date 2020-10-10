@@ -1,6 +1,6 @@
-const fs = require('fs');
-const yaml = require('yaml');
-const glob = require('fast-glob');
+import fs from 'fs';
+import yaml from 'yaml';
+import glob from 'fast-glob';
 
 const collector = async (paths) => {
   const docs = [];
@@ -21,4 +21,4 @@ const collector = async (paths) => {
   return docs;
 };
 
-module.exports = collector;
+export default collector;

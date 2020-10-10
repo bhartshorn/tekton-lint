@@ -1,4 +1,4 @@
-const { walk, pathToString } = require('../walk');
+import { walk, pathToString } from '../walk';
 
 const createVisitor = (resource, params, prefix, report) => (node, path, parent) => {
   if (path.includes('taskSpec')) return;
@@ -28,13 +28,13 @@ function getTaskParams(crd) {
   return [];
 }
 
-module.exports = (docs, tekton, report) => {
-  for (const pipeline of Object.values(tekton.pipelines)) {
+export default (docs, tekton, report) => {
+  for (const pipeline of Object.values<any>(tekton.pipelines)) {
     const params = getParams(pipeline);
     walk(pipeline.spec.tasks, ['spec', 'tasks'], createVisitor(pipeline.metadata.name, params, 'params', report));
   }
 
-  for (const task of Object.values(tekton.tasks)) {
+  for (const task of Object.values<any>(tekton.tasks)) {
     const params = getTaskParams(task);
     for (const prefix of ['inputs.params', 'params']) {
       for (const prop of ['steps', 'volumes', 'stepTemplate', 'sidecars']) {
@@ -43,7 +43,7 @@ module.exports = (docs, tekton, report) => {
     }
   }
 
-  for (const template of Object.values(tekton.triggerTemplates)) {
+  for (const template of Object.values<any>(tekton.triggerTemplates)) {
     const params = getParams(template);
     walk(template.spec.resourcetemplates, ['spec', 'resourcetemplates'], createVisitor(template.metadata.name, params, 'params', report));
   }

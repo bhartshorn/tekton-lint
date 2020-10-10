@@ -1,6 +1,6 @@
-const chokidar = require('chokidar');
-const run = require('./runner');
-const { logProblems } = require('./utils');
+import chokidar from 'chokidar';
+import run from './runner';
+import { logProblems } from './utils';
 
 const runLinter = async (cause, paths) => {
   console.log(cause);
@@ -9,7 +9,7 @@ const runLinter = async (cause, paths) => {
   console.log('Tekton-lint finished running!');
 };
 
-module.exports = (paths) => {
+export default (paths) => {
   const watcher = chokidar.watch(paths, {
     persistent: true,
   });

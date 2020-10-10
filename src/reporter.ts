@@ -67,6 +67,9 @@ function instrument(docs) {
 }
 
 class Reporter {
+  private m: any;
+  problems: any[];
+
   constructor(docs = []) {
     this.m = instrument(docs);
     this.problems = [];
@@ -80,7 +83,7 @@ class Reporter {
     this.report(message, node, prop, false);
   }
 
-  report(message, node, prop, isError, rule) {
+  report(message, node, prop, isError, rule?) {
     this.problems.push({
       message,
       rule,
@@ -90,4 +93,4 @@ class Reporter {
   }
 }
 
-module.exports = Reporter;
+export default Reporter;

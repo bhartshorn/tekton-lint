@@ -1,3 +1,3 @@
-module.exports = (problems) => {
+export default (problems) => {
   console.log(JSON.stringify(problems));
-}
+};

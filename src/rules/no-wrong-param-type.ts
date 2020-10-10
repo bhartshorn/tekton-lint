@@ -14,19 +14,19 @@ function getTaskParams(spec) {
   return spec.params;
 }
 
-module.exports = (docs, tekton, report) => {
-  for (const task of Object.values(tekton.tasks)) {
+export default (docs, tekton, report) => {
+  for (const task of Object.values<any>(tekton.tasks)) {
     const params = getTaskParams(task.spec);
     if (!params) continue;
     checkParameterValues(task.metadata.name, task.kind, params, report);
   }
 
-  for (const template of Object.values(tekton.triggerTemplates)) {
+  for (const template of Object.values<any>(tekton.triggerTemplates)) {
     if (!template.spec.params) continue;
     checkParameterValues(template.metadata.name, template.kind, template.spec.params, report);
   }
 
-  for (const pipeline of Object.values(tekton.pipelines)) {
+  for (const pipeline of Object.values<any>(tekton.pipelines)) {
     if (!pipeline.spec.params) continue;
     checkParameterValues(pipeline.metadata.name, pipeline.kind, pipeline.spec.params, report);
   }

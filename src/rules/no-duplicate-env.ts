@@ -1,5 +1,5 @@
-module.exports = (docs, tekton, report) => {
-  for (const task of Object.values(tekton.tasks)) {
+export default (docs, tekton, report) => {
+  for (const task of Object.values<any>(tekton.tasks)) {
     for (const step of task.spec.steps) {
       if (!step.env) continue;
       const envVariables = new Set();

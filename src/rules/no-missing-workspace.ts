@@ -1,10 +1,10 @@
-module.exports = (docs, tekton, report) => {
-  for (const task of Object.values(tekton.tasks)) {
+export default (docs, tekton, report) => {
+  for (const task of Object.values<any>(tekton.tasks)) {
     if (!task.spec.workspaces) continue;
     const taskName = task.metadata.name;
     const requiredWorkspaces = task.spec.workspaces.map(ws => ws.name);
 
-    for (const pipeline of Object.values(tekton.pipelines)) {
+    for (const pipeline of Object.values<any>(tekton.pipelines)) {
       const matchingTaskRefs = pipeline.spec.tasks.filter(task => task.taskRef && task.taskRef.name === taskName);
 
       for (const taskRef of matchingTaskRefs) {
@@ -19,7 +19,7 @@ module.exports = (docs, tekton, report) => {
     }
   }
 
-  for (const pipeline of Object.values(tekton.pipelines)) {
+  for (const pipeline of Object.values<any>(tekton.pipelines)) {
     const pipelineWorkspaces = pipeline.spec.workspaces || [];
     for (const task of pipeline.spec.tasks) {
       if (!task.workspaces) continue;
@@ -32,11 +32,11 @@ module.exports = (docs, tekton, report) => {
     }
   }
 
-  for (const pipeline of Object.values(tekton.pipelines)) {
+  for (const pipeline of Object.values<any>(tekton.pipelines)) {
     if (!pipeline.spec.workspaces) continue;
     const required = pipeline.spec.workspaces.map(ws => ws.name);
 
-    for (const template of Object.values(tekton.triggerTemplates)) {
+    for (const template of Object.values<any>(tekton.triggerTemplates)) {
       const pipelineRuns = template.spec.resourcetemplates.filter(item => item.spec && item.spec.pipelineRef && item.spec.pipelineRef.name === pipeline.metadata.name);
 
       for (const pipelineRun of pipelineRuns) {
