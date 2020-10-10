@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 
-import { version } from '../package.json';
 import minimist from 'minimist';
 import watch from './watch';
 import run from './runner';
 import logProblems from './log-problems';
+const pkg = require('../package.json');
 
 const argv = minimist(process.argv.slice(2), {
   boolean: ['watch'],
@@ -41,7 +41,7 @@ $ tekton-lint --watch '**/*.yaml'
 
 (() => {
   if (argv.version) {
-    return console.log(`Version: ${version}`);
+    return console.log(`Version: ${pkg.version}`);
   }
 
   if (argv.help) {

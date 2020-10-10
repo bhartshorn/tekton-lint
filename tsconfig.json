@@ -3,8 +3,6 @@
     "target": "es2020",
     "module": "commonjs",
     "lib": ["ES2020"],
-    "allowJs": true,
-    "checkJs": true,
     "outDir": "./lib",
     "strict": false,
     "moduleResolution": "node",
@@ -13,8 +11,9 @@
     "inlineSources": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "composite": true,
-    "resolveJsonModule": true
+    "declaration": true
   },
-  "files": ["package.json"]
+  "include": [
+    "src/**/*.ts"
+  ]
 }
