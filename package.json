@@ -1,20 +1,8 @@
 {
   "name": "tekton-lint",
   "files": [
-    "utils.js",
-    "watch.js",
-    "lint.js",
-    "reporter.js",
-    "rules.js",
-    "collect-resources.js",
-    "Collector.js",
-    "runner.js",
-    "rules/*.js",
-    "rule-loader.js",
-    "walk.js",
-    ".tektonlintrc.yaml",
-    "log-problems.js",
-    "formatters/*.js"
+    "lib/**/*.js",
+    "lib/**/*.d.ts"
   ],
   "scripts": {
     "lint": "eslint --ext ts src",
@@ -23,13 +11,13 @@
   },
   "version": "0.4.3",
   "description": "Linter for Tekton definitions",
-  "main": "runner.js",
+  "main": "lib/runner.js",
   "repository": {
     "type": "git",
     "url": "git@github.com:IBM/tekton-lint.git"
   },
   "bin": {
-    "tekton-lint": "lint.js"
+    "tekton-lint": "lib/lint.js"
   },
   "author": "Bence Dányi <bence.danyi@ibm.com>",
   "license": "Apache-2.0",
