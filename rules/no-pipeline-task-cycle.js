@@ -3,7 +3,7 @@ const { alg, Graph } = require('graphlib');
 function readParamReference({ value }) {
   const taskResultReferenceRegexp = /\$\(tasks\.[a-z|-]*\.results\.[a-z|-]*\)/;
   if (!value) return;
-  if (!value.match(taskResultReferenceRegexp)) return;
+  if (!value.toString().match(taskResultReferenceRegexp)) return;
   const referencedTaskname = value.split('$(tasks.')[1].split('.')[0];
 
   return {
